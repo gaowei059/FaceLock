@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.arcsoft.sdk_demo">
+
+    <!-- camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- sdcard -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- wifi internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 自启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <uses-permission android:name="android.permission.STATUS_BAR"/>
+
+    <application
+        android:name=".Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/face_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".PermissionAcitivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".DetecterActivity" ></activity>
+        <activity android:name=".DetectActivity" ></activity>
+        <activity android:name=".MainActivity"></activity>
+
+        <activity
+            android:name=".ui.ThemeWaterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.arcsoft.sdk_demo.lock.LockerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":ServiceProcess" />
+        <service
+            android:name="com.arcsoft.sdk_demo.lock.LockerProtectService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":ServiceProcess" />
+
+        <!-- 注册自启动接收器 -->
+        <receiver android:name="com.arcsoft.sdk_demo.lock.LockerBootReceiver">
+            <intent-filter>
+
+                <!-- 开机启动 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 后台启动 -->
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
